@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.github.elianaferreira.productslist.R
 import com.github.elianaferreira.productslist.databinding.ActivityMainBinding
 import com.github.elianaferreira.productslist.stories.products.model.entities.Product
 import com.github.elianaferreira.productslist.stories.products.presenter.ProductsListPresenterImpl
@@ -19,6 +20,10 @@ class MainActivity : AppCompatActivity(), ProductsListView {
         binding = ActivityMainBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
+
+        setSupportActionBar(binding.includedToolbar.toolbar)
+        binding.includedToolbar.toolbarTitle.text = getString(R.string.products_label)
+        setSupportActionBar(binding.includedToolbar.toolbar)
 
         binding.rvProducts.layoutManager = LinearLayoutManager(this@MainActivity)
 

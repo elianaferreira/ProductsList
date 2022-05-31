@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.Toolbar
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/toolbar"
+    android:layout_width="match_parent"
+    android:layout_height="?attr/actionBarSize"
+    android:elevation="@dimen/elevation">
+
+    <TextView
+        android:id="@+id/toolbar_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/products_label"
+        android:gravity="center"
+        android:layout_marginEnd="@dimen/toolbar_margin"
+        style="@style/Title"/>
+
+
+</androidx.appcompat.widget.Toolbar>

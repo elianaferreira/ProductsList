@@ -9,10 +9,10 @@
     android:orientation="vertical"
     android:background="@color/white">
 
-    <androidx.appcompat.widget.Toolbar
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:title="@string/app_name" />
+    <include
+        android:id="@+id/included_toolbar"
+        layout="@layout/toolbar" />
+
     <androidx.appcompat.widget.SearchView
         android:id="@+id/sv_products"
         android:layout_width="match_parent"

@@ -9,6 +9,10 @@
         <item name="android:textStyle">bold</item>
     </style>
 
+    <style name="Title" parent="BoldText">
+        <item name="android:textSize">@dimen/title</item>
+    </style>
+
     <style name="StrikethroughText" parent="Widget.AppCompat.TextView">
         <item name="android:textSize">@dimen/small_text</item>
         <item name="android:textColor">@color/light_gray</item>
