@@ -2,4 +2,6 @@
     <string name="app_name">ProductsList</string>
 
     <string name="generic_error_message">An error occurred retrieving dta from server</string>
+
+    <string name="price_label">$%1$s</string>
 </resources>

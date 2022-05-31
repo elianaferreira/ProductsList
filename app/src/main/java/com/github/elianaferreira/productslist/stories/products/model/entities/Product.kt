@@ -15,7 +15,7 @@ data class Product(
     @SerializedName("is_favourite_product")
     val isFavouriteProduct: Boolean,
     @SerializedName("main_image")
-    val mainImage: String,
+    val mainImage: String?,
     @SerializedName("main_image_240_box")
     val mainImage240Box: String,
     @SerializedName("main_image_240_wide")
