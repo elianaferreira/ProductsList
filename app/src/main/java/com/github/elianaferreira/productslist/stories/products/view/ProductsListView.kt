@@ -1,5 +1,8 @@
 package com.github.elianaferreira.productslist.stories.products.view
 
+import com.github.elianaferreira.productslist.stories.products.model.entities.Product
+
 interface ProductsListView {
-    fun showList()
+    fun showList(products: List<Product>)
+    fun showError(message: String)
 }

@@ -1,4 +1,4 @@
-package com.github.elianaferreira.productslist.stories.products.model
+package com.github.elianaferreira.productslist.stories.products.model.entities
 
 
 import com.google.gson.annotations.SerializedName

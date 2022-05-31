@@ -1,4 +1,4 @@
-package com.github.elianaferreira.productslist.stories.products.model
+package com.github.elianaferreira.productslist.stories.products.model.entities
 
 
 import com.google.gson.annotations.SerializedName
@@ -17,11 +17,9 @@ data class VendorInventory(
     @SerializedName("price")
     val price: Double,
     @SerializedName("promotions")
-    val promotions: Any,
+    val promotions: List<Promotion>,
     @SerializedName("special_fee")
     val specialFee: String,
-    @SerializedName("special_fee_amount")
-    val specialFeeAmount: Any,
     @SerializedName("vendor")
     val vendor: Vendor,
     @SerializedName("vendor_inventory_id")

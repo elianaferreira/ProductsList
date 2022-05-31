@@ -26,7 +26,7 @@
         android:id="@+id/txt_item_description"
         android:layout_width="match_parent"
         android:layout_height="@dimen/item_image_size"
-        android:text="@android:string/bugreport_message"
+        android:text="texto largo"
         android:layout_toEndOf="@id/img_main"
         android:layout_marginTop="@dimen/general_margin"
         android:layout_marginEnd="@dimen/general_margin"

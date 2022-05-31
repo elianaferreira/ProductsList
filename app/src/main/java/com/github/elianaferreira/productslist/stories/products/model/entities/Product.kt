@@ -1,4 +1,4 @@
-package com.github.elianaferreira.productslist.stories.products.model
+package com.github.elianaferreira.productslist.stories.products.model.entities
 
 
 import com.google.gson.annotations.SerializedName
@@ -17,9 +17,9 @@ data class Product(
     @SerializedName("main_image")
     val mainImage: String,
     @SerializedName("main_image_240_box")
-    val mainImage240Box: Any,
+    val mainImage240Box: String,
     @SerializedName("main_image_240_wide")
-    val mainImage240Wide: Any,
+    val mainImage240Wide: String,
     @SerializedName("name")
     val name: String,
     @SerializedName("unit_name")
