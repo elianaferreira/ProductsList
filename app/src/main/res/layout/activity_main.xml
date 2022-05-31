@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -16,10 +16,29 @@
     <androidx.appcompat.widget.SearchView
         android:id="@+id/sv_products"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_below="@id/included_toolbar"
+        android:layout_marginStart="@dimen/general_margin"
+        android:layout_marginEnd="@dimen/general_margin"
+        android:background="@drawable/rounded_bg"
+        app:submitBackground="@drawable/rounded_bg"/>
+
+    <View
+        android:id="@+id/divider"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/thin_line_height"
+        android:background="@color/light_gray"
+        android:layout_below="@id/sv_products"
+        android:layout_marginTop="@dimen/medium_margin"/>
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_products"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:layout_below="@id/divider"/>
 
-</LinearLayout>
+    <include
+        android:id="@+id/included_pb"
+        layout="@layout/progress_bar" />
+
+</RelativeLayout>

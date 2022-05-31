@@ -3,6 +3,7 @@ package com.github.elianaferreira.productslist.stories.products.view
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.github.elianaferreira.productslist.R
@@ -37,5 +38,9 @@ class MainActivity : AppCompatActivity(), ProductsListView {
 
     override fun showError(message: String) {
         Toast.makeText(this@MainActivity, message, Toast.LENGTH_LONG).show()
+    }
+
+    override fun showProgressBar(show: Boolean) {
+        binding.includedPb.progressbar.visibility = if (show) View.VISIBLE else View.GONE
     }
 }

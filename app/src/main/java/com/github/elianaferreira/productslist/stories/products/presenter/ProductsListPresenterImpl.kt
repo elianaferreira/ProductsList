@@ -10,14 +10,17 @@ class ProductsListPresenterImpl(private val view: ProductsListView): ProductsLis
     private val repository = ProductsListRepositoryImpl(this)
 
     override fun loadList() {
+        view.showProgressBar(true)
         repository.getProductsList()
     }
 
     override fun onSuccess(response: Any) {
+        view.showProgressBar(false)
         view.showList((response as ProductsResponse).list)
     }
 
     override fun onError(errorMessage: String) {
+        view.showProgressBar(false)
         view.showError(errorMessage)
     }
 }
