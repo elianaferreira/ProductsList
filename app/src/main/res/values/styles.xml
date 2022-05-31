@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="NormalText" parent="Widget.AppCompat.TextView">
+        <item name="android:textColor">@color/text_color</item>
+        <item name="android:textSize">@dimen/medium_text</item>
+    </style>
+
+    <style name="BoldText" parent="NormalText">
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="StrikethroughText" parent="Widget.AppCompat.TextView">
+        <item name="android:textSize">@dimen/small_text</item>
+        <item name="android:textColor">@color/light_gray</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:foreground">@drawable/strikethrough</item>
+    </style>
+</resources>
