@@ -12,14 +12,16 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.github.elianaferreira.productslist.R
 import com.github.elianaferreira.productslist.databinding.ActivityMainBinding
 import com.github.elianaferreira.productslist.stories.products.model.entities.Product
+import com.github.elianaferreira.productslist.stories.products.presenter.ProductsListPresenter
 import com.github.elianaferreira.productslist.stories.products.presenter.ProductsListPresenterImpl
 import com.github.elianaferreira.productslist.utils.ProductsListAdapter
 
-class MainActivity : AppCompatActivity(), ProductsListView {
+class MainActivity : AppCompatActivity(), ProductsListView, ProductsListAdapter.CheckboxCallback {
 
     private lateinit var binding: ActivityMainBinding
 
     private lateinit var adapter: ProductsListAdapter
+    private lateinit var presenter: ProductsListPresenter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,7 +35,7 @@ class MainActivity : AppCompatActivity(), ProductsListView {
 
         binding.rvProducts.layoutManager = LinearLayoutManager(this@MainActivity)
 
-        val presenter = ProductsListPresenterImpl(this@MainActivity)
+        presenter = ProductsListPresenterImpl(this@MainActivity)
         presenter.loadList()
 
         val searchManager = getSystemService(Context.SEARCH_SERVICE) as SearchManager
@@ -54,7 +56,7 @@ class MainActivity : AppCompatActivity(), ProductsListView {
     }
 
     override fun showList(products: List<Product>) {
-        adapter = ProductsListAdapter(this@MainActivity, products)
+        adapter = ProductsListAdapter(this@MainActivity, products, this@MainActivity)
         binding.rvProducts.adapter = adapter
     }
 
@@ -64,5 +66,15 @@ class MainActivity : AppCompatActivity(), ProductsListView {
 
     override fun showProgressBar(show: Boolean) {
         binding.includedPb.progressbar.visibility = if (show) View.VISIBLE else View.GONE
+    }
+
+    override fun onCheckedCallback(isChecked: Boolean, product: Product) {
+        if (isChecked) {
+            presenter.addProductToFavorite(product)
+        }
+    }
+
+    override fun onProductAdded(product: Product) {
+        //TODO save somewhere
     }
 }

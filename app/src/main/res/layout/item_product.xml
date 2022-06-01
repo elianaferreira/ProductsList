@@ -15,12 +15,16 @@
         android:layout_marginBottom="@dimen/space"
         android:layout_marginEnd="@dimen/space"/>
 
-    <ImageView
-        android:id="@+id/img_fav"
+    <CheckBox
+        android:id="@+id/chk_fav"
         android:layout_width="@dimen/fav_icon_size"
         android:layout_height="@dimen/fav_icon_size"
-        android:src="@drawable/fav_button_outline"
-        android:layout_margin="@dimen/medium_margin"/>
+        android:layout_marginStart="@dimen/medium_margin"
+        android:layout_marginTop="@dimen/medium_margin"
+        android:layout_marginEnd="@dimen/medium_margin"
+        android:layout_marginBottom="@dimen/medium_margin"
+        android:button="@null"
+        android:background="@drawable/fav_checkbox"/>
 
     <TextView
         android:id="@+id/txt_item_description"

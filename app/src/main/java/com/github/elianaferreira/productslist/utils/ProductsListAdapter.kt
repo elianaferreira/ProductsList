@@ -3,16 +3,15 @@ package com.github.elianaferreira.productslist.utils
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.Filter
-import android.widget.Filterable
-import android.widget.ImageView
-import android.widget.TextView
+import android.widget.*
 import androidx.recyclerview.widget.RecyclerView
 import com.github.elianaferreira.productslist.R
 import com.github.elianaferreira.productslist.stories.products.model.entities.Product
 import com.github.elianaferreira.viewholder.GenericViewHolder
 
-class ProductsListAdapter(private val context: Context, private val dataSet: List<Product>):
+class ProductsListAdapter(private val context: Context,
+                          private val dataSet: List<Product>,
+                          private val callback: CheckboxCallback):
     RecyclerView.Adapter<GenericViewHolder>(), Filterable {
 
     private var filteredDataSet = dataSet
@@ -31,6 +30,9 @@ class ProductsListAdapter(private val context: Context, private val dataSet: Lis
             product.mainImage)
         holder.get(R.id.txt_actual_price, TextView::class.java).text = context.getString(R.string.price_label, product.vendorInventory[0].listPrice.toString())
         holder.get(R.id.txt_previous_price, TextView::class.java).text = context.getString(R.string.price_label, product.vendorInventory[0].price.toString())
+        holder.get(R.id.chk_fav, CheckBox::class.java).setOnCheckedChangeListener {_, isChecked ->
+            callback.onCheckedCallback(isChecked, product)
+        }
     }
 
     override fun getItemCount(): Int {
@@ -57,5 +59,9 @@ class ProductsListAdapter(private val context: Context, private val dataSet: Lis
             }
 
         }
+    }
+
+    interface CheckboxCallback {
+        fun onCheckedCallback(isChecked: Boolean, product: Product)
     }
 }

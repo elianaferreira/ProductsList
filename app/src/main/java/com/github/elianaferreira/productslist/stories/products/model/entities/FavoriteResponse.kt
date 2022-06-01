@@ -4,6 +4,6 @@ import androidx.annotation.Keep
 import com.google.gson.annotations.SerializedName
 
 @Keep
-data class Response(
+data class FavoriteResponse(
     @SerializedName("favorite")
     val favorite: Boolean)

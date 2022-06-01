@@ -1,7 +1,7 @@
 package com.github.elianaferreira.productslist.service
 
 import com.github.elianaferreira.productslist.stories.products.model.entities.ProductsResponse
-import com.github.elianaferreira.productslist.stories.products.model.entities.Response
+import com.github.elianaferreira.productslist.stories.products.model.entities.FavoriteResponse
 import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -27,8 +27,8 @@ interface ApiInterface {
     fun getProducts(): Call<ProductsResponse>
 
     @POST("/favorites")
-    fun addProductToFavorites(): Call<Response>
+    fun addProductToFavorites(): Call<FavoriteResponse>
 
     @DELETE("/favorites")
-    fun deleteProductFromFavorites(): Call<Response>
+    fun deleteProductFromFavorites(): Call<FavoriteResponse>
 }
