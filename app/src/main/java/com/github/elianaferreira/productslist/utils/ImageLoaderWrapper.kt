@@ -12,6 +12,8 @@ class ImageLoaderWrapper {
                 Picasso
                     .get()
                     .load(url)
+                    .error(R.drawable.image)
+                    .placeholder(R.drawable.image)
                     .into(imageView)
             } else {
                 Picasso
