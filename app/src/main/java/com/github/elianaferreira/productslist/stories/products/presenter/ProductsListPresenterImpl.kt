@@ -75,6 +75,7 @@ class ProductsListPresenterImpl(
         } else {
             prefs.edit().putBoolean(product.id, true).apply()
         }
+        view.reloadLitIfNeeded()
     }
 
     override fun compareProducts(products: List<Product>): List<Product> {

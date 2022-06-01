@@ -22,6 +22,7 @@ class MainActivity : AppCompatActivity(), ProductsListView, ProductsListAdapter.
 
     private lateinit var adapter: ProductsListAdapter
     private lateinit var presenter: ProductsListPresenter
+    private var filterValue = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -64,12 +65,15 @@ class MainActivity : AppCompatActivity(), ProductsListView, ProductsListAdapter.
                         when (which) {
                             0 -> {
                                 adapter.filter.filter(ProductsListAdapter.FavoriteFilter.FilterFavorite.name)
+                                filterValue = ProductsListAdapter.FavoriteFilter.FilterFavorite.name
                             }
                             1 -> {
                                 adapter.filter.filter(ProductsListAdapter.FavoriteFilter.FilterNoFavorite.name)
+                                filterValue = ProductsListAdapter.FavoriteFilter.FilterNoFavorite.name
                             }
                             else -> {
                                 adapter.filter.filter("")
+                                filterValue = ""
                             }
                         }
                     }
@@ -126,5 +130,11 @@ class MainActivity : AppCompatActivity(), ProductsListView, ProductsListAdapter.
     override fun onRemoveProductFailed(product: Product) {
         adapter.updateProductState(product, true)
         showError(getString(R.string.remove_fav_product_error_message))
+    }
+
+    override fun reloadLitIfNeeded() {
+        if (!filterValue.isEmpty()) {
+            adapter.filter.filter(filterValue)
+        }
     }
 }

@@ -8,4 +8,5 @@ interface ProductsListView {
     fun showProgressBar(show: Boolean)
     fun onAddProductFailed(product: Product)
     fun onRemoveProductFailed(product: Product)
+    fun reloadLitIfNeeded()
 }
