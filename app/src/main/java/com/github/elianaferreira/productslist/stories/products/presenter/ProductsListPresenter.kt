@@ -8,4 +8,5 @@ interface ProductsListPresenter {
     fun removeProductFromFavorite(product: Product)
     fun saveOrRemoveProductFromNoFavorite(product: Product)
     fun compareProducts(products: List<Product>): List<Product>
+    fun clearNoFavoriteList()
 }

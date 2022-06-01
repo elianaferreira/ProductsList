@@ -91,6 +91,7 @@ class MainActivity : AppCompatActivity(), ProductsListView, ProductsListAdapter.
             R.color.dark_blue,
             R.color.blue)
         binding.swProducts.setOnRefreshListener {
+            presenter.clearNoFavoriteList()
             presenter.loadList()
         }
     }

@@ -74,4 +74,11 @@ class ProductsListPresenterImpl(
         }
         return products
     }
+
+    override fun clearNoFavoriteList() {
+        PreferenceManager.getDefaultSharedPreferences(context)
+            .edit()
+            .clear()
+            .apply()
+    }
 }
