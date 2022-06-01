@@ -21,7 +21,9 @@
         android:layout_marginStart="@dimen/general_margin"
         android:layout_marginEnd="@dimen/general_margin"
         android:background="@drawable/rounded_bg"
-        app:submitBackground="@drawable/rounded_bg"/>
+        app:queryBackground="@drawable/rounded_bg"
+        app:submitBackground="@drawable/rounded_bg"
+        app:iconifiedByDefault="false" />
 
     <View
         android:id="@+id/divider"

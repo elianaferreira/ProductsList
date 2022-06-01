@@ -1,9 +1,12 @@
 package com.github.elianaferreira.productslist.stories.products.view
 
+import android.app.SearchManager
+import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.SearchView
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.github.elianaferreira.productslist.R
@@ -15,6 +18,8 @@ import com.github.elianaferreira.productslist.utils.ProductsListAdapter
 class MainActivity : AppCompatActivity(), ProductsListView {
 
     private lateinit var binding: ActivityMainBinding
+
+    private lateinit var adapter: ProductsListAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,10 +35,27 @@ class MainActivity : AppCompatActivity(), ProductsListView {
 
         val presenter = ProductsListPresenterImpl(this@MainActivity)
         presenter.loadList()
+
+        val searchManager = getSystemService(Context.SEARCH_SERVICE) as SearchManager
+        binding.svProducts.setSearchableInfo(searchManager.getSearchableInfo(componentName))
+        binding.svProducts.setOnQueryTextListener(object : SearchView.OnQueryTextListener,
+            androidx.appcompat.widget.SearchView.OnQueryTextListener {
+            override fun onQueryTextChange(newText: String?): Boolean {
+                if (this@MainActivity::adapter.isInitialized) {
+                    adapter.filter.filter(newText)
+                }
+                return false
+            }
+
+            override fun onQueryTextSubmit(p0: String?): Boolean {
+                return false
+            }
+        })
     }
 
     override fun showList(products: List<Product>) {
-        binding.rvProducts.adapter = ProductsListAdapter(this@MainActivity, products)
+        adapter = ProductsListAdapter(this@MainActivity, products)
+        binding.rvProducts.adapter = adapter
     }
 
     override fun showError(message: String) {
