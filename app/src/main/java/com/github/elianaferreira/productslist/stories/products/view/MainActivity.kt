@@ -1,15 +1,19 @@
 package com.github.elianaferreira.productslist.stories.products.view
 
+import android.annotation.SuppressLint
 import android.app.AlertDialog
 import android.app.SearchManager
 import android.content.Context
 import android.content.DialogInterface
+import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.SearchView
 import android.widget.Toast
+import androidx.annotation.AttrRes
+import androidx.annotation.ColorInt
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.github.elianaferreira.productslist.R
 import com.github.elianaferreira.productslist.databinding.ActivityMainBinding
@@ -17,6 +21,7 @@ import com.github.elianaferreira.productslist.stories.products.model.entities.Pr
 import com.github.elianaferreira.productslist.stories.products.presenter.ProductsListPresenter
 import com.github.elianaferreira.productslist.stories.products.presenter.ProductsListPresenterImpl
 import com.github.elianaferreira.productslist.utils.ProductsListAdapter
+import com.google.android.material.color.MaterialColors
 
 class MainActivity : AppCompatActivity(), ProductsListView, ProductsListAdapter.CheckboxCallback {
 
@@ -25,6 +30,7 @@ class MainActivity : AppCompatActivity(), ProductsListView, ProductsListAdapter.
     private lateinit var adapter: ProductsListAdapter
     private lateinit var presenter: ProductsListPresenter
 
+    @SuppressLint("ResourceType")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
@@ -59,16 +65,16 @@ class MainActivity : AppCompatActivity(), ProductsListView, ProductsListAdapter.
         binding.btnFilter.setOnClickListener { _ ->
             val alertDialog: AlertDialog? = this@MainActivity.let {
                 val builder = AlertDialog.Builder(it)
-                val items = builder.setTitle(R.string.filter_title)
+                builder.setTitle(R.string.filter_title)
                     .setItems(
                         R.array.filter_values
                     ) { _, which ->
                         when (which) {
                             0 -> {
-                                adapter.filter.filter(ProductsListAdapter.FavoriteFilter.filterFavorite.name)
+                                adapter.filter.filter(ProductsListAdapter.FavoriteFilter.FilterFavorite.name)
                             }
                             1 -> {
-                                adapter.filter.filter(ProductsListAdapter.FavoriteFilter.filterNoFavorite.name)
+                                adapter.filter.filter(ProductsListAdapter.FavoriteFilter.FilterNoFavorite.name)
                             }
                             else -> {
                                 adapter.filter.filter("")
@@ -79,10 +85,22 @@ class MainActivity : AppCompatActivity(), ProductsListView, ProductsListAdapter.
             }
             alertDialog?.show()
         }
+
+        binding.swProducts.setColorScheme(
+            R.color.blue,
+            R.color.dark_blue,
+            R.color.blue)
+        binding.swProducts.setOnRefreshListener {
+            presenter.loadList()
+        }
     }
 
     override fun showList(products: List<Product>) {
         val curatedList = presenter.compareProducts(products)
+        if (this@MainActivity::adapter.isInitialized) {
+            //clear data, the adapter was previously loaded
+            adapter.clearData()
+        }
         adapter = ProductsListAdapter(this@MainActivity, curatedList, this@MainActivity)
         binding.rvProducts.adapter = adapter
     }
@@ -93,6 +111,9 @@ class MainActivity : AppCompatActivity(), ProductsListView, ProductsListAdapter.
 
     override fun showProgressBar(show: Boolean) {
         binding.includedPb.progressbar.visibility = if (show) View.VISIBLE else View.GONE
+        if (this@MainActivity::adapter.isInitialized) {
+            binding.swProducts.isRefreshing = show
+        }
     }
 
     override fun onCheckedCallback(isChecked: Boolean, product: Product) {

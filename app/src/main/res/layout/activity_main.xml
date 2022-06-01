@@ -46,11 +46,16 @@
         android:layout_below="@id/sv_products"
         android:layout_marginTop="@dimen/medium_margin"/>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_products"
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/sw_products"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/divider" />
+        android:layout_below="@id/divider">
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_products"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
     <include
         android:id="@+id/included_pb"
