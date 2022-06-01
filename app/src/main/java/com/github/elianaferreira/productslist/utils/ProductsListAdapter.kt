@@ -2,12 +2,16 @@ package com.github.elianaferreira.productslist.utils
 
 import android.content.Context
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import android.widget.*
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import com.github.elianaferreira.productslist.R
 import com.github.elianaferreira.productslist.stories.products.model.entities.Product
 import com.github.elianaferreira.viewholder.GenericViewHolder
+import com.google.android.material.badge.BadgeDrawable
+import com.google.android.material.badge.BadgeUtils
 
 class ProductsListAdapter(private val context: Context,
                           private val dataSet: List<Product>,
@@ -35,6 +39,13 @@ class ProductsListAdapter(private val context: Context,
             product.isFavouriteProduct = isChecked
             callback.onCheckedCallback(isChecked, product)
         }
+
+        holder.get(R.id.badge, TextView::class.java).visibility =
+            if (product.advertisingBadges.badges != null && product.advertisingBadges.badges.first().badgeImageUrl != null) {
+                View.VISIBLE
+            } else {
+                View.GONE
+            }
     }
 
     override fun getItemCount(): Int {

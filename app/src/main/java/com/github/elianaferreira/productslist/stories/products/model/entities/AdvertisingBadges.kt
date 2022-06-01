@@ -7,7 +7,7 @@ import androidx.annotation.Keep
 @Keep
 data class AdvertisingBadges(
     @SerializedName("badges")
-    val badges: List<Badge>,
+    val badges: List<Badge>?,
     @SerializedName("has_badge")
     val hasBadge: Boolean
 )

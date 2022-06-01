@@ -19,4 +19,12 @@
         <item name="android:textStyle">bold</item>
         <item name="android:foreground">@drawable/strikethrough</item>
     </style>
+
+    <style name="Badge" parent="Widget.AppCompat.TextView">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">@dimen/minor_text_size</item>
+        <item name="android:background">@drawable/badge</item>
+        <item name="android:paddingStart">@dimen/minor_margin</item>
+        <item name="android:paddingEnd">@dimen/minor_margin</item>
+    </style>
 </resources>

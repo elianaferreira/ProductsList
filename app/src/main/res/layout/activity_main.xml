@@ -23,7 +23,8 @@
         android:background="@drawable/rounded_bg"
         app:queryBackground="@drawable/rounded_bg"
         app:submitBackground="@drawable/rounded_bg"
-        app:iconifiedByDefault="false" />
+        app:iconifiedByDefault="false"
+        app:queryHint="@string/search_hint"/>
 
     <View
         android:id="@+id/divider"
