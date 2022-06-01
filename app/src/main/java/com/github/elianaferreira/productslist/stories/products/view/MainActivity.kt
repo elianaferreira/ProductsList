@@ -104,10 +104,7 @@ class MainActivity : AppCompatActivity(), ProductsListView, ProductsListAdapter.
 
     override fun showProgressBar(show: Boolean) {
         binding.includedPb.progressbar.visibility = if (show) View.VISIBLE else View.GONE
-        //does not show the swipeRefresh indicator at the first call
-        if (this@MainActivity::adapter.isInitialized) {
-            binding.swProducts.isRefreshing = show
-        }
+        if (!show) binding.swProducts.isRefreshing = false
     }
 
     override fun onCheckedCallback(isChecked: Boolean, product: Product) {
@@ -116,5 +113,13 @@ class MainActivity : AppCompatActivity(), ProductsListView, ProductsListAdapter.
         } else {
             presenter.removeProductFromFavorite(product)
         }
+    }
+
+    /*
+        When fail adding the product, it should be unchecked again and the list reloaded
+     */
+    override fun onAddProductFailed(product: Product) {
+        adapter.updateProductState(product, false)
+        showError(getString(R.string.add_fav_product_error_message))
     }
 }

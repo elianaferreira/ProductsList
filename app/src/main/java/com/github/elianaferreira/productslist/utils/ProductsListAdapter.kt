@@ -94,4 +94,9 @@ class ProductsListAdapter(private val context: Context,
         filteredDataSet = ArrayList<Product>()
         notifyDataSetChanged()
     }
+
+    fun updateProductState(product: Product, favoriteState: Boolean) {
+        filteredDataSet[filteredDataSet.indexOf(product)].isFavouriteProduct = favoriteState
+        notifyDataSetChanged()
+    }
 }

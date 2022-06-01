@@ -40,12 +40,14 @@ class ProductsListRepositoryImpl(
             override fun onResponse(call: Call<FavoriteResponse>, response: Response<FavoriteResponse>) {
                 if(response.body() != null) {
                     requestCallback.onAddProductFavoriteSuccess(product)
+                } else {
+                    requestCallback.onAddProductFavoriteFailure(product)
                 }
             }
 
             override fun onFailure(call: Call<FavoriteResponse>, t: Throwable) {
                 if (BuildConfig.DEBUG) Log.e(TAG, "failure adding product", t)
-                requestCallback.onError(context.getString(R.string.add_fav_product_error_message))
+                requestCallback.onAddProductFavoriteFailure(product)
             }
         })
     }

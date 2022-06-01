@@ -54,6 +54,11 @@ class ProductsListPresenterImpl(
         view.showError(errorMessage)
     }
 
+    override fun onAddProductFavoriteFailure(response: Product) {
+        view.showProgressBar(false)
+        view.onAddProductFailed(response)
+    }
+
     /**
      * All products are favorites by default.
      * This method add products that were unchecked to a Nofav list.
