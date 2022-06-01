@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Sowingo App</string>
+    <string name="app_name">Products List</string>
 
     <string name="price_label">$%1$s</string>
     <string name="products_label">Products</string>

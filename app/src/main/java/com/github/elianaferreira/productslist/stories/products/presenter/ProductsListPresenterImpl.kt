@@ -70,6 +70,7 @@ class ProductsListPresenterImpl(
     override fun compareProducts(products: List<Product>): List<Product> {
         val prefs: SharedPreferences = PreferenceManager.getDefaultSharedPreferences(context)
         for (product in products) {
+            //if the product is in th NoFav list, change the attribute to false
             product.isFavouriteProduct = !prefs.contains(product.id)
         }
         return products

@@ -61,12 +61,16 @@ class ProductsListAdapter(private val context: Context,
                 filteredDataSet = if (queryString.isEmpty()) {
                     dataSet
                 } else {
-                    if (queryString == FavoriteFilter.FilterFavorite.name) {
-                        dataSet.filter { it.isFavouriteProduct }
-                    } else if (queryString == FavoriteFilter.FilterNoFavorite.name) {
-                        dataSet.filter { !it.isFavouriteProduct }
-                    } else {
-                        dataSet.filter { it.name.lowercase().contains(queryString.lowercase()) }
+                    when (queryString) {
+                        FavoriteFilter.FilterFavorite.name -> {
+                            dataSet.filter { it.isFavouriteProduct }
+                        }
+                        FavoriteFilter.FilterNoFavorite.name -> {
+                            dataSet.filter { !it.isFavouriteProduct }
+                        }
+                        else -> {
+                            dataSet.filter { it.name.lowercase().contains(queryString.lowercase()) }
+                        }
                     }
                 }
                 val filterResults = FilterResults()

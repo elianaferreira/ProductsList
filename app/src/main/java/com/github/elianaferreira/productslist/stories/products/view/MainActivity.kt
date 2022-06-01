@@ -1,19 +1,13 @@
 package com.github.elianaferreira.productslist.stories.products.view
 
-import android.annotation.SuppressLint
 import android.app.AlertDialog
 import android.app.SearchManager
 import android.content.Context
-import android.content.DialogInterface
-import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.SearchView
 import android.widget.Toast
-import androidx.annotation.AttrRes
-import androidx.annotation.ColorInt
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.github.elianaferreira.productslist.R
 import com.github.elianaferreira.productslist.databinding.ActivityMainBinding
@@ -21,7 +15,6 @@ import com.github.elianaferreira.productslist.stories.products.model.entities.Pr
 import com.github.elianaferreira.productslist.stories.products.presenter.ProductsListPresenter
 import com.github.elianaferreira.productslist.stories.products.presenter.ProductsListPresenterImpl
 import com.github.elianaferreira.productslist.utils.ProductsListAdapter
-import com.google.android.material.color.MaterialColors
 
 class MainActivity : AppCompatActivity(), ProductsListView, ProductsListAdapter.CheckboxCallback {
 
@@ -30,7 +23,6 @@ class MainActivity : AppCompatActivity(), ProductsListView, ProductsListAdapter.
     private lateinit var adapter: ProductsListAdapter
     private lateinit var presenter: ProductsListPresenter
 
-    @SuppressLint("ResourceType")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
@@ -112,6 +104,7 @@ class MainActivity : AppCompatActivity(), ProductsListView, ProductsListAdapter.
 
     override fun showProgressBar(show: Boolean) {
         binding.includedPb.progressbar.visibility = if (show) View.VISIBLE else View.GONE
+        //does not show the swipeRefresh indicator at the first call
         if (this@MainActivity::adapter.isInitialized) {
             binding.swProducts.isRefreshing = show
         }
