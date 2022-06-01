@@ -1,13 +1,13 @@
 package com.github.elianaferreira.productslist.stories.products.presenter
 
 import android.content.Context
+import android.content.SharedPreferences
+import androidx.preference.PreferenceManager
 import com.github.elianaferreira.productslist.stories.products.model.ProductsListRepository
 import com.github.elianaferreira.productslist.stories.products.model.ProductsListRepositoryImpl
-import com.github.elianaferreira.productslist.stories.products.model.entities.FavoriteResponse
 import com.github.elianaferreira.productslist.stories.products.model.entities.Product
 import com.github.elianaferreira.productslist.stories.products.model.entities.ProductsResponse
 import com.github.elianaferreira.productslist.stories.products.view.ProductsListView
-import com.github.elianaferreira.productslist.utils.RequestCallback
 
 class ProductsListPresenterImpl(
         private val context: Context,
@@ -39,16 +39,39 @@ class ProductsListPresenterImpl(
 
     override fun onAddProductFavoriteSuccess(response: Product) {
         view.showProgressBar(false)
-        view.onProductAdded(response)
+        response.isFavouriteProduct = true
+        saveOrRemoveProductFromNoFavorite(response)
     }
 
     override fun onRemoveProductFavoriteSuccess(response: Product) {
         view.showProgressBar(false)
-        view.onProductRemoved(response)
+        response.isFavouriteProduct = false
+        saveOrRemoveProductFromNoFavorite(response)
     }
 
     override fun onError(errorMessage: String) {
         view.showProgressBar(false)
         view.showError(errorMessage)
+    }
+
+    /**
+     * All products are favorites by default.
+     * This method add products that were unchecked to a Nofav list.
+     */
+    override fun saveOrRemoveProductFromNoFavorite(product: Product) {
+        val prefs: SharedPreferences = PreferenceManager.getDefaultSharedPreferences(context)
+        if (product.isFavouriteProduct) {
+            prefs.edit().remove(product.id).apply()
+        } else {
+            prefs.edit().putBoolean(product.id, true).apply()
+        }
+    }
+
+    override fun compareProducts(products: List<Product>): List<Product> {
+        val prefs: SharedPreferences = PreferenceManager.getDefaultSharedPreferences(context)
+        for (product in products) {
+            product.isFavouriteProduct = !prefs.contains(product.id)
+        }
+        return products
     }
 }

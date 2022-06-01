@@ -30,7 +30,9 @@ class ProductsListAdapter(private val context: Context,
             product.mainImage)
         holder.get(R.id.txt_actual_price, TextView::class.java).text = context.getString(R.string.price_label, product.vendorInventory[0].listPrice.toString())
         holder.get(R.id.txt_previous_price, TextView::class.java).text = context.getString(R.string.price_label, product.vendorInventory[0].price.toString())
+        holder.get(R.id.chk_fav, CheckBox::class.java).isChecked = product.isFavouriteProduct
         holder.get(R.id.chk_fav, CheckBox::class.java).setOnCheckedChangeListener {_, isChecked ->
+            product.isFavouriteProduct = isChecked
             callback.onCheckedCallback(isChecked, product)
         }
     }

@@ -56,7 +56,8 @@ class MainActivity : AppCompatActivity(), ProductsListView, ProductsListAdapter.
     }
 
     override fun showList(products: List<Product>) {
-        adapter = ProductsListAdapter(this@MainActivity, products, this@MainActivity)
+        val curatedList = presenter.compareProducts(products)
+        adapter = ProductsListAdapter(this@MainActivity, curatedList, this@MainActivity)
         binding.rvProducts.adapter = adapter
     }
 
@@ -74,13 +75,5 @@ class MainActivity : AppCompatActivity(), ProductsListView, ProductsListAdapter.
         } else {
             presenter.removeProductFromFavorite(product)
         }
-    }
-
-    override fun onProductAdded(product: Product) {
-        //TODO save somewhere
-    }
-
-    override fun onProductRemoved(product: Product) {
-        //TODO remove
     }
 }

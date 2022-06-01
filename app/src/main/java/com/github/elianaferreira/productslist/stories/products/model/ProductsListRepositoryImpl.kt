@@ -55,7 +55,7 @@ class ProductsListRepositoryImpl(
         apiInterface.enqueue(object : Callback<FavoriteResponse> {
             override fun onResponse(call: Call<FavoriteResponse>, response: Response<FavoriteResponse>) {
                 if(response.body() != null) {
-                    requestCallback.onAddProductFavoriteSuccess(product)
+                    requestCallback.onRemoveProductFavoriteSuccess(product)
                 }
             }
 

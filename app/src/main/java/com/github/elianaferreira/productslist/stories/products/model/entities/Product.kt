@@ -6,6 +6,8 @@ import androidx.annotation.Keep
 
 @Keep
 data class Product(
+    @SerializedName("id")
+    val id: String,
     @SerializedName("advertising_badges")
     val advertisingBadges: AdvertisingBadges,
     @SerializedName("description")
@@ -13,7 +15,7 @@ data class Product(
     @SerializedName("images")
     val images: List<Image>,
     @SerializedName("is_favourite_product")
-    val isFavouriteProduct: Boolean,
+    var isFavouriteProduct: Boolean,
     @SerializedName("main_image")
     val mainImage: String?,
     @SerializedName("main_image_240_box")
