@@ -7,4 +7,5 @@ interface ProductsListView {
     fun showError(message: String)
     fun showProgressBar(show: Boolean)
     fun onProductAdded(product: Product)
+    fun onProductRemoved(product: Product)
 }

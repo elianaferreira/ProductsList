@@ -5,4 +5,5 @@ import com.github.elianaferreira.productslist.stories.products.model.entities.Pr
 interface ProductsListPresenter {
     fun loadList()
     fun addProductToFavorite(product: Product)
+    fun removeProductFromFavorite(product: Product)
 }

@@ -35,7 +35,7 @@ class MainActivity : AppCompatActivity(), ProductsListView, ProductsListAdapter.
 
         binding.rvProducts.layoutManager = LinearLayoutManager(this@MainActivity)
 
-        presenter = ProductsListPresenterImpl(this@MainActivity)
+        presenter = ProductsListPresenterImpl(this@MainActivity, this@MainActivity)
         presenter.loadList()
 
         val searchManager = getSystemService(Context.SEARCH_SERVICE) as SearchManager
@@ -71,10 +71,16 @@ class MainActivity : AppCompatActivity(), ProductsListView, ProductsListAdapter.
     override fun onCheckedCallback(isChecked: Boolean, product: Product) {
         if (isChecked) {
             presenter.addProductToFavorite(product)
+        } else {
+            presenter.removeProductFromFavorite(product)
         }
     }
 
     override fun onProductAdded(product: Product) {
         //TODO save somewhere
+    }
+
+    override fun onProductRemoved(product: Product) {
+        //TODO remove
     }
 }

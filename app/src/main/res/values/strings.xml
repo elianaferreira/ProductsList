@@ -1,8 +1,11 @@
 <resources>
     <string name="app_name">Sowingo App</string>
 
-    <string name="generic_error_message">An error occurred retrieving dta from server</string>
-
     <string name="price_label">$%1$s</string>
     <string name="products_label">Products</string>
+
+    <!-- error messages -->
+    <string name="generic_error_message">An error occurred retrieving data from server</string>
+    <string name="add_fav_product_error_message">Error adding product to favorites</string>
+    <string name="remove_fav_product_error_message">Error removing product from favorites</string>
 </resources>

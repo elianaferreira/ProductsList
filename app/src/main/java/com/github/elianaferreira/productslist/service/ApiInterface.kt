@@ -30,5 +30,5 @@ interface ApiInterface {
     fun addProductToFavorites(): Call<FavoriteResponse>
 
     @DELETE("/favorites")
-    fun deleteProductFromFavorites(): Call<FavoriteResponse>
+    fun removeProductFromFavorites(): Call<FavoriteResponse>
 }
