@@ -62,6 +62,9 @@ class MainActivity : AppCompatActivity(), ProductsListView, ProductsListAdapter.
                     .setItems(
                         R.array.filter_values
                     ) { _, which ->
+                        if (!this@MainActivity::adapter.isInitialized) {
+                            return@setItems
+                        }
                         when (which) {
                             0 -> {
                                 adapter.filter.filter(ProductsListAdapter.FavoriteFilter.FilterFavorite.name)
@@ -133,7 +136,7 @@ class MainActivity : AppCompatActivity(), ProductsListView, ProductsListAdapter.
     }
 
     override fun reloadLitIfNeeded() {
-        if (!filterValue.isEmpty()) {
+        if (filterValue.isNotEmpty()) {
             adapter.filter.filter(filterValue)
         }
     }

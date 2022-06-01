@@ -1,64 +1,68 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+    android:id="@+id/sw_products"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".stories.products.view.MainActivity"
-    android:orientation="vertical"
     android:background="@color/white">
 
-    <include
-        android:id="@+id/included_toolbar"
-        layout="@layout/toolbar" />
-
-    <ImageButton
-        android:id="@+id/btn_filter"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/included_toolbar"
-        android:layout_alignBottom="@id/sv_products"
-        android:layout_alignParentEnd="true"
-        android:layout_marginEnd="@dimen/general_margin"
-        android:background="@null"
-        android:src="@drawable/ic_filter" />
-
-    <androidx.appcompat.widget.SearchView
-        android:id="@+id/sv_products"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/included_toolbar"
-        android:layout_marginStart="@dimen/general_margin"
-        android:layout_marginEnd="@dimen/medium_margin"
-        android:layout_toStartOf="@id/btn_filter"
-        android:background="@drawable/rounded_bg"
-        app:iconifiedByDefault="false"
-        app:queryBackground="@drawable/rounded_bg"
-        app:queryHint="@string/search_hint"
-        app:submitBackground="@drawable/rounded_bg" />
-
-    <View
-        android:id="@+id/divider"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/thin_line_height"
-        android:background="@color/light_gray"
-        android:layout_below="@id/sv_products"
-        android:layout_marginTop="@dimen/medium_margin"/>
-
-    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-        android:id="@+id/sw_products"
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/divider">
+        tools:context=".stories.products.view.MainActivity"
+        android:orientation="vertical">
+
+        <include
+            android:id="@+id/included_toolbar"
+            layout="@layout/toolbar" />
+
+
+        <ImageButton
+            android:id="@+id/btn_filter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/included_toolbar"
+            android:layout_alignBottom="@id/sv_products"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="@dimen/general_margin"
+            android:background="@null"
+            android:src="@drawable/ic_filter" />
+
+        <androidx.appcompat.widget.SearchView
+            android:id="@+id/sv_products"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/included_toolbar"
+            android:layout_marginStart="@dimen/general_margin"
+            android:layout_marginEnd="@dimen/medium_margin"
+            android:layout_toStartOf="@id/btn_filter"
+            android:background="@drawable/rounded_bg"
+            app:iconifiedByDefault="false"
+            app:queryBackground="@drawable/rounded_bg"
+            app:queryHint="@string/search_hint"
+            app:submitBackground="@drawable/rounded_bg" />
+
+        <View
+            android:id="@+id/divider"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/thin_line_height"
+            android:background="@color/light_gray"
+            android:layout_below="@id/sv_products"
+            android:layout_marginTop="@dimen/medium_margin"/>
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_products"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+            android:layout_height="wrap_content"
+            android:layout_below="@id/divider"/>
 
-    <include
-        android:id="@+id/included_pb"
-        layout="@layout/progress_bar" />
+        <include
+            android:id="@+id/included_pb"
+            layout="@layout/progress_bar"
+            android:visibility="gone"/>
 
-</RelativeLayout>
+    </RelativeLayout>
+
+</androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
