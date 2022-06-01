@@ -1,7 +1,9 @@
 package com.github.elianaferreira.productslist.stories.products.view
 
+import android.app.AlertDialog
 import android.app.SearchManager
 import android.content.Context
+import android.content.DialogInterface
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -53,6 +55,30 @@ class MainActivity : AppCompatActivity(), ProductsListView, ProductsListAdapter.
                 return false
             }
         })
+
+        binding.btnFilter.setOnClickListener { _ ->
+            val alertDialog: AlertDialog? = this@MainActivity.let {
+                val builder = AlertDialog.Builder(it)
+                val items = builder.setTitle(R.string.filter_title)
+                    .setItems(
+                        R.array.filter_values
+                    ) { _, which ->
+                        when (which) {
+                            0 -> {
+                                adapter.filter.filter(ProductsListAdapter.FavoriteFilter.filterFavorite.name)
+                            }
+                            1 -> {
+                                adapter.filter.filter(ProductsListAdapter.FavoriteFilter.filterNoFavorite.name)
+                            }
+                            else -> {
+                                adapter.filter.filter("")
+                            }
+                        }
+                    }
+                builder.create()
+            }
+            alertDialog?.show()
+        }
     }
 
     override fun showList(products: List<Product>) {

@@ -13,18 +13,30 @@
         android:id="@+id/included_toolbar"
         layout="@layout/toolbar" />
 
+    <ImageButton
+        android:id="@+id/btn_filter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/included_toolbar"
+        android:layout_alignBottom="@id/sv_products"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="@dimen/general_margin"
+        android:background="@null"
+        android:src="@drawable/ic_filter" />
+
     <androidx.appcompat.widget.SearchView
         android:id="@+id/sv_products"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/included_toolbar"
         android:layout_marginStart="@dimen/general_margin"
-        android:layout_marginEnd="@dimen/general_margin"
+        android:layout_marginEnd="@dimen/medium_margin"
+        android:layout_toStartOf="@id/btn_filter"
         android:background="@drawable/rounded_bg"
-        app:queryBackground="@drawable/rounded_bg"
-        app:submitBackground="@drawable/rounded_bg"
         app:iconifiedByDefault="false"
-        app:queryHint="@string/search_hint"/>
+        app:queryBackground="@drawable/rounded_bg"
+        app:queryHint="@string/search_hint"
+        app:submitBackground="@drawable/rounded_bg" />
 
     <View
         android:id="@+id/divider"
@@ -38,7 +50,7 @@
         android:id="@+id/rv_products"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/divider"/>
+        android:layout_below="@id/divider" />
 
     <include
         android:id="@+id/included_pb"

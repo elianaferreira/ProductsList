@@ -5,18 +5,20 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
-import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import com.github.elianaferreira.productslist.R
 import com.github.elianaferreira.productslist.stories.products.model.entities.Product
 import com.github.elianaferreira.viewholder.GenericViewHolder
-import com.google.android.material.badge.BadgeDrawable
-import com.google.android.material.badge.BadgeUtils
 
 class ProductsListAdapter(private val context: Context,
                           private val dataSet: List<Product>,
                           private val callback: CheckboxCallback):
     RecyclerView.Adapter<GenericViewHolder>(), Filterable {
+
+    enum class FavoriteFilter {
+        filterFavorite,
+        filterNoFavorite
+    }
 
     private var filteredDataSet = dataSet
 
@@ -59,7 +61,13 @@ class ProductsListAdapter(private val context: Context,
                 filteredDataSet = if (queryString.isEmpty()) {
                     dataSet
                 } else {
-                    dataSet.filter { it.name.lowercase().contains(queryString.lowercase()) }
+                    if (queryString == FavoriteFilter.filterFavorite.name) {
+                        dataSet.filter { it.isFavouriteProduct }
+                    } else if (queryString == FavoriteFilter.filterNoFavorite.name) {
+                        dataSet.filter { !it.isFavouriteProduct }
+                    } else {
+                        dataSet.filter { it.name.lowercase().contains(queryString.lowercase()) }
+                    }
                 }
                 val filterResults = FilterResults()
                 filterResults.values = filteredDataSet
