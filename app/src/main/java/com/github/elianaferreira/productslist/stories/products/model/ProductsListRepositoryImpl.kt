@@ -58,6 +58,8 @@ class ProductsListRepositoryImpl(
             override fun onResponse(call: Call<FavoriteResponse>, response: Response<FavoriteResponse>) {
                 if(response.body() != null) {
                     requestCallback.onRemoveProductFavoriteSuccess(product)
+                } else {
+                    requestCallback.onRemoveProductFavoriteFailure(product)
                 }
             }
 

@@ -122,4 +122,9 @@ class MainActivity : AppCompatActivity(), ProductsListView, ProductsListAdapter.
         adapter.updateProductState(product, false)
         showError(getString(R.string.add_fav_product_error_message))
     }
+
+    override fun onRemoveProductFailed(product: Product) {
+        adapter.updateProductState(product, true)
+        showError(getString(R.string.remove_fav_product_error_message))
+    }
 }

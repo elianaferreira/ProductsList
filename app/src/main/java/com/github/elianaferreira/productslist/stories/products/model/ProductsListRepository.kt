@@ -14,5 +14,6 @@ interface ProductsListRepository {
         fun onAddProductFavoriteSuccess(response: Product)
         fun onRemoveProductFavoriteSuccess(response: Product)
         fun onAddProductFavoriteFailure(response: Product)
+        fun onRemoveProductFavoriteFailure(response: Product)
     }
 }
