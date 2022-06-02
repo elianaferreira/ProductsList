@@ -1,10 +1,11 @@
 package com.github.elianaferreira.productslist.stories.products.view
 
-import android.app.AlertDialog
 import android.app.SearchManager
 import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import android.view.View
 import android.widget.SearchView
 import android.widget.Toast
@@ -31,59 +32,13 @@ class MainActivity : AppCompatActivity(), ProductsListView, ProductsListAdapter.
         setContentView(view)
 
         setSupportActionBar(binding.includedToolbar.toolbar)
-        binding.includedToolbar.toolbarTitle.text = getString(R.string.products_label)
+        binding.includedToolbar.toolbar.title = getString(R.string.products_label)
         setSupportActionBar(binding.includedToolbar.toolbar)
 
         binding.rvProducts.layoutManager = LinearLayoutManager(this@MainActivity)
 
         presenter = ProductsListPresenterImpl(this@MainActivity, this@MainActivity)
         presenter.loadList()
-
-        val searchManager = getSystemService(Context.SEARCH_SERVICE) as SearchManager
-        binding.svProducts.setSearchableInfo(searchManager.getSearchableInfo(componentName))
-        binding.svProducts.setOnQueryTextListener(object : SearchView.OnQueryTextListener,
-            androidx.appcompat.widget.SearchView.OnQueryTextListener {
-            override fun onQueryTextChange(newText: String?): Boolean {
-                if (this@MainActivity::adapter.isInitialized) {
-                    adapter.filter.filter(newText)
-                }
-                return false
-            }
-
-            override fun onQueryTextSubmit(p0: String?): Boolean {
-                return false
-            }
-        })
-
-        binding.btnFilter.setOnClickListener { _ ->
-            val alertDialog: AlertDialog? = this@MainActivity.let {
-                val builder = AlertDialog.Builder(it)
-                builder.setTitle(R.string.filter_title)
-                    .setItems(
-                        R.array.filter_values
-                    ) { _, which ->
-                        if (!this@MainActivity::adapter.isInitialized) {
-                            return@setItems
-                        }
-                        when (which) {
-                            0 -> {
-                                adapter.filter.filter(ProductsListAdapter.FavoriteFilter.FilterFavorite.name)
-                                filterValue = ProductsListAdapter.FavoriteFilter.FilterFavorite.name
-                            }
-                            1 -> {
-                                adapter.filter.filter(ProductsListAdapter.FavoriteFilter.FilterNoFavorite.name)
-                                filterValue = ProductsListAdapter.FavoriteFilter.FilterNoFavorite.name
-                            }
-                            else -> {
-                                adapter.filter.filter("")
-                                filterValue = ""
-                            }
-                        }
-                    }
-                builder.create()
-            }
-            alertDialog?.show()
-        }
 
         binding.swProducts.setColorScheme(
             R.color.blue,
@@ -140,4 +95,54 @@ class MainActivity : AppCompatActivity(), ProductsListView, ProductsListAdapter.
             adapter.filter.filter(filterValue)
         }
     }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.list_menu, menu)
+
+        val searchItem: MenuItem? = menu?.findItem(R.id.action_search)
+        val searchManager = getSystemService(Context.SEARCH_SERVICE) as SearchManager
+        val searchView: SearchView = searchItem?.actionView as SearchView
+        searchView.queryHint = getString(R.string.search_hint)
+
+        searchView.setSearchableInfo(searchManager.getSearchableInfo(componentName))
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                return false
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                if (this@MainActivity::adapter.isInitialized) {
+                    adapter.filter.filter(newText)
+                }
+                return false
+            }
+        })
+
+        return super.onCreateOptionsMenu(menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (!this@MainActivity::adapter.isInitialized) {
+            return false
+        }
+        filterValue = when (item.itemId) {
+            R.id.action_list_favorites -> {
+                adapter.filter.filter(ProductsListAdapter.FavoriteFilter.FilterFavorite.name)
+                ProductsListAdapter.FavoriteFilter.FilterFavorite.name
+            }
+            R.id.action_list_no_favorites -> {
+                adapter.filter.filter(ProductsListAdapter.FavoriteFilter.FilterNoFavorite.name)
+                ProductsListAdapter.FavoriteFilter.FilterNoFavorite.name
+            }
+            R.id.action_list_all -> {
+                adapter.filter.filter("")
+                ""
+            }
+            else -> {
+                ""
+            }
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
 }

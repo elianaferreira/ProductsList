@@ -6,6 +6,8 @@
     <string name="search_hint">Search Product Name, Sku, Keyword…</string>
     <string name="best_seller">best seller</string>
     <string name="filter_title">Filter products</string>
+    <string name="search">Search</string>
+    <string name="filter">Filter</string>
 
     <string-array name="filter_values">
         <item>Favorite</item>
