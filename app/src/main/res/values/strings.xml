@@ -8,12 +8,7 @@
     <string name="filter_title">Filter products</string>
     <string name="search">Search</string>
     <string name="filter">Filter</string>
-
-    <string-array name="filter_values">
-        <item>Favorite</item>
-        <item>No Favorite</item>
-        <item>All</item>
-    </string-array>
+    <string name="error_close_button">OK</string>
 
     <!-- error messages -->
     <string name="generic_error_message">An error occurred retrieving data from server</string>

@@ -8,13 +8,13 @@ import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.widget.SearchView
-import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.github.elianaferreira.productslist.R
 import com.github.elianaferreira.productslist.databinding.ActivityMainBinding
 import com.github.elianaferreira.productslist.stories.products.model.entities.Product
 import com.github.elianaferreira.productslist.stories.products.presenter.ProductsListPresenter
 import com.github.elianaferreira.productslist.stories.products.presenter.ProductsListPresenterImpl
+import com.github.elianaferreira.productslist.utils.ErrorUtils
 import com.github.elianaferreira.productslist.utils.ProductsListAdapter
 
 class MainActivity : AppCompatActivity(), ProductsListView, ProductsListAdapter.CheckboxCallback {
@@ -51,6 +51,9 @@ class MainActivity : AppCompatActivity(), ProductsListView, ProductsListAdapter.
     }
 
     override fun showList(products: List<Product>) {
+        //first, hide error layout
+        binding.errorLayout.errorWrapper.visibility = View.GONE
+
         val curatedList = presenter.compareProducts(products)
         if (this@MainActivity::adapter.isInitialized) {
             //clear data, the adapter was previously loaded
@@ -61,7 +64,13 @@ class MainActivity : AppCompatActivity(), ProductsListView, ProductsListAdapter.
     }
 
     override fun showError(message: String) {
-        Toast.makeText(this@MainActivity, message, Toast.LENGTH_LONG).show()
+        if (message == getString(R.string.generic_error_message)) {
+            if (!this@MainActivity::adapter.isInitialized || binding.rvProducts.adapter?.itemCount == 0) {
+                binding.errorLayout.errorWrapper.visibility = View.VISIBLE
+            }
+        } else {
+            ErrorUtils.showErrorMessage(binding.swProducts, message)
+        }
     }
 
     override fun showProgressBar(show: Boolean) {

@@ -65,7 +65,7 @@ class ProductsListRepositoryImpl(
 
             override fun onFailure(call: Call<FavoriteResponse>, t: Throwable) {
                 if (BuildConfig.DEBUG) Log.e(TAG, "failure removing product", t)
-                requestCallback.onError(context.getString(R.string.remove_fav_product_error_message))
+                requestCallback.onRemoveProductFavoriteFailure(product)
             }
         })
     }
