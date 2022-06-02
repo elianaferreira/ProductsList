@@ -139,6 +139,7 @@ class MainActivity : AppCompatActivity(), ProductsListView, ProductsListAdapter.
                 ""
             }
             else -> {
+                //no reload the list by default
                 ""
             }
         }
